@@ -1,0 +1,33 @@
+﻿@model List<Vidly.Models.Domain.Employee>
+@{
+}
+
+<h1>Employees</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Salary</th>
+            <th>Date Of Birth</th>
+            <th>Department</th>
+            <th> </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr> 
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Email</td>
+                <td>@item.Salary</td>
+                <td>@item.DateOfBirth.ToString("dd-MMM-yyyy")</td>
+                <td>@item.Department</td>
+                <td><a href="Employees/View/@item.Id">View</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
