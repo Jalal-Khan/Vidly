@@ -48,5 +48,60 @@ namespace Vidly.Controllers
             return RedirectToAction("Index");
 
         }
+
+        [HttpGet]
+        public async Task<IActionResult> View(Guid id)
+        {
+            var employee = await DbContext.Employees.FirstOrDefaultAsync(X => X.Id == id);
+            
+            if(employee != null)
+            {
+                var viewModel = new EditEmployeeViewModel()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = employee.Name,
+                    Email = employee.Email,
+                    Salary = employee.Salary,
+                    DateOfBirth = employee.DateOfBirth,
+                    Department = employee.Department,
+                };
+                return await Task.Run(() => View("View", viewModel));
+            }
+
+            return RedirectToAction("Index");
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> View(EditEmployeeViewModel model)
+        {
+            var employee= await DbContext.Employees.FindAsync(model.Id);
+            if(employee!=null) 
+            {
+                employee.Name = model.Name;
+                employee.Email = model.Email;
+                employee.Salary = model.Salary;
+                employee.DateOfBirth = model.DateOfBirth;
+                employee.Department = model.Department;
+                
+                await DbContext.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public async Task<IActionResult> Delete(EditEmployeeViewModel model)
+        {
+            var employee = await DbContext.Employees.FindAsync(model.Id);
+            if(employee!=null)
+            {
+                DbContext.Employees.Remove(employee);
+                await DbContext.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
