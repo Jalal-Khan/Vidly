@@ -3,6 +3,22 @@
 }
 
 <h1>Employees</h1>
+@*<form method="get" asp-action="Search" action="Search" class="d-flex">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <button type="submit" class="btn btn-primary"
+            asp-action="Search"
+            asp-controller="Employees">
+        Search
+    </button>
+</form>
+*@
+<form method="get" asp-action="Search" class="d-flex">
+    <p>
+        <input type="search" placeholder="Search here" value="@ViewData["SearchString"]" name="searchString" width="500px;"/>
+        <input type="submit" value="Search" class="btn btn_primary"/>
+         
+    </p>
+</form>
 
 <table class="table">
     <thead>

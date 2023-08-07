@@ -48,7 +48,25 @@ namespace Vidly.Controllers
             return RedirectToAction("Index");
 
         }
+        [HttpGet]
+        public async Task<IActionResult> Search(string searchString)
+        {
+            ViewData["SearchString"] = searchString;
+            if(DbContext.Employees==null)
+            {
+                return Problem("Entity set 'vidly.Context' is null.");
+            }
 
+            /*var employee = from e in DbContext.Employees
+                           select e;*/
+            var employee = DbContext.Employees.ToList();
+            var filteredResult = new List<Employee>();
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                filteredResult = (List<Employee>)employee.Where(e=>e.Name.Contains(searchString)||e.Email.Contains(searchString)).ToList();
+            }
+            return View("Index",filteredResult.ToList());              
+        }
         [HttpGet]
         public async Task<IActionResult> View(Guid id)
         {
