@@ -1,17 +1,7 @@
 ﻿@model List<Vidly.Models.Domain.Employee>
 @{
 }
-
 <h1>Employees</h1>
-@*<form method="get" asp-action="Search" action="Search" class="d-flex">
-    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-    <button type="submit" class="btn btn-primary"
-            asp-action="Search"
-            asp-controller="Employees">
-        Search
-    </button>
-</form>
-*@
 <form method="get" asp-action="Search" class="d-flex">
     <p>
         <input type="search" placeholder="Search here" value="@ViewData["SearchString"]" name="searchString" width="500px;"/>
@@ -19,7 +9,6 @@
          
     </p>
 </form>
-
 <table class="table">
     <thead>
         <tr>
@@ -42,7 +31,7 @@
                 <td>@item.Salary</td>
                 <td>@item.DateOfBirth.ToString("dd-MMM-yyyy")</td>
                 <td>@item.Department</td>
-                <td><a href="Employees/View/@item.Id">View</a></td>
+                <td><a href="/Employees/View/@item.Id">View</a></td>
             </tr>
         }
     </tbody>
