@@ -30,6 +30,7 @@ namespace Vidly.Controllers
             return View(); 
         }
 
+        //This is add method
         [HttpPost]
         public async Task<IActionResult> Add(AddEmployeeViewModel addEmployeeRequest)
         {
