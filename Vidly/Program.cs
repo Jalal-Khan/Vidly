@@ -32,7 +32,7 @@ namespace Vidly
             app.UseRouting();
 
             app.UseAuthorization();
-
+            //this is a Map controller route
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
