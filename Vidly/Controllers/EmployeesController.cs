@@ -47,7 +47,6 @@ namespace Vidly.Controllers
             await DbContext.Employees.AddAsync(employee);
             await DbContext.SaveChangesAsync();
             return RedirectToAction("Index");
-
         }
         [HttpGet]
         public async Task<IActionResult> Search(string searchString)
